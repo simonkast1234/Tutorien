@@ -2,6 +2,7 @@ import Prog1Tools.IOTools;
 
 /*
 Heute:
+Test
 Methoden Grundlagen
 rekursive Funktionen
 bubblesort
