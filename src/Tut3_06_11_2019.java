@@ -4,6 +4,11 @@ public class Tut3_06_11_2019 {
     /**
      * Heute nur Wiederholung des imperativen Blocks
      * @param args
+     *
+     * foreach:
+     * for (typ name : durchzugehendes Array){
+     *     do(name);
+     * }
      */
     public static void main(String[] args) {
         double[] arr = readArray(4);
@@ -11,9 +16,9 @@ public class Tut3_06_11_2019 {
         double[] negativ = subset(arr, -1.0);
 
         double[][] joint = join(positiv, negativ);
-        print(joint[0]);
-        print(joint[0]);
-        // foreach checken hierfür
+        for (double[] doubles : joint) {
+            print(doubles);
+        }
     }
 
     //1.1
@@ -24,6 +29,11 @@ public class Tut3_06_11_2019 {
             array[i] = IOTools.readDouble( i+1 +". double Werte eingeben: ");
         }
         return array;
+    }
+
+    //gegeben
+    public static double[][] join (double[] first, double[] second){
+        return new double[][] {first, second};
     }
 
     //1.2
@@ -57,16 +67,12 @@ public class Tut3_06_11_2019 {
     public static void print(double[] zahlen){
         if (zahlen == null || zahlen.length == 0){
             System.out.println("[]");
-        } else{
-            System.out.print("[");
-            for (int i = 0; i < zahlen.length; i++) {
-                System.out.print("zahlen[i] + ", ");
-            }
-            System.out.println("]");
+            return;
         }
+        System.out.print("[");
+        for (int i = 0; i < zahlen.length; i++) {
+            System.out.print(zahlen[i] + ", ");
+        }
+        System.out.println("]");
     }
-
-
-
-
 }
