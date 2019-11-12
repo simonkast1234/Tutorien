@@ -2,7 +2,6 @@ import Prog1Tools.IOTools;
 
 /*
 Heute:
-Test 123
 Methoden Grundlagen
 rekursive Funktionen
 bubblesort
@@ -11,8 +10,8 @@ mehrdimensionale Arrays
 
 public class Tut2 {
     public static void main(String[] args) {
+        tannenbaum();
         //a13();
-        //a22();
         //boolean t = testPrime(IOTools.readInt("Zahl eingeben: "));
         //System.out.println(t);
         // mehrDimArray();
@@ -25,9 +24,9 @@ public class Tut2 {
 
         int [][] schachbrett = new int [8][8]; // Spalten x Zeilen) 2 dim array initialisieren
 
-        for (int i = 0; i < schachbrett.length; i++) { // i-te Zeile in der wir sind (Spaltendurchgang)
-            for (int j = 0; j < schachbrett[i].length; j++) { // j-te Spalte (Zeilendurchgang)
-                schachbrett[i][j] = (i+1)+j; // Spaltennummer + 1 + Zeilennummer
+        for (int i = 0; i < schachbrett.length; i++) { // Spaltendurchgang
+            for (int j = 0; j < schachbrett[i].length; j++) { // Zeilendurchgang
+                schachbrett[i][j] = (i+1)+j; // i=Spaltenposition j=Zeilenposition
             }
         }
         print2Dim(schachbrett);
@@ -56,10 +55,8 @@ public class Tut2 {
         System.out.println();
 
         // Sortieralgorithmus
-        for (int i = 0; i < werte.length; i++) { //Wir gehen a mal durdch das array, damit wir jeden Wert vergleichen
-
+        for (int i = 0; i < werte.length; i++) { //Wir gehen a mal durch das array, damit wir jeden Wert vergleichen
             for (int j = 1; j < werte.length - i; j++) { // so oft durch array, wie es unsortierte elemente gibt
-
                 if(werte[j-1]>werte[j]){ // vergleich aktuelles paerchen mit vorherigem
                     int tmp = werte[j-1]; // Tausch
                     werte[j-1] = werte[j];
@@ -90,31 +87,31 @@ public class Tut2 {
     public static void a13(){ // rechte Haelfte Tannenbaum
         int a = IOTools.readInt("Anzahl der Zeilen: ");
 
-        for (int i = 1; i <= a ; i++) {
-            for (int j = 0; j < i ; j++) {
+        for (int i = 0; i < a ; i++) {
+            for (int j = 0; j <= i ; j++) {
                 System.out.print("*");
             }
             System.out.println();
         }
     }
 
-    public static void a22(){ // ganzer Tannenbaum
-        int a = IOTools.readInt("Anzahl der Zeilen: ");
+    public static void tannenbaum(){
+        int a = IOTools.readInt("Wie viele Zeilen? ");
 
-        for (int i = 1; i <= a; i++) {
-            for (int j = a -i; j != 0; j--) { // Leerzeichen setzen
+        for (int i = 0; i < a; i++) { // Zeilen durchgehen
+            for (int j = a - i; j > 1; j--) { // Leerzeichen
                 System.out.print(" ");
             }
-            for (int j = 2*i-1; j != 0; j--) {
+            for (int j = 2*i+1; j > 0; j--) {
                 System.out.print("*");
             }
-            System.out.println();
+            System.out.println("");
         }
-        for (int i = 1; i <= a-1; i++) {
+
+        for (int i = 0; i < a-1; i++) {
             System.out.print(" ");
         }
-        System.out.print("I");
-        System.out.println();
+        System.out.println("I");
     }
 
     public static boolean testPrime(int zahl){
@@ -125,5 +122,4 @@ public class Tut2 {
         }
         return true;
     }
-
 }
