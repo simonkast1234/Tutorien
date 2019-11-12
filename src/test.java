@@ -1,17 +1,42 @@
+import Prog1Tools.IOTools;
+
 public class test {
     public static void main(String[] args) {
-        int[] zahlen = new int [] {1,2,3,4,5};
-        //zahlen = new int[] {1,2,3,4,5};
+        //String[] a = {"name", "bla", "blabla"};
+        //String[] a = null;
+        //printArray(a);
+
+        printArray(convertArray(new boolean[]{false, true, false}, ';'));
 
 
-        /*
-        for (int i = 0; i < zahlen.length; i++) {
-            zahlen[i] = i + 1;
-        }
-        */
-
-        for (int wert : zahlen) {
-            System.out.println(wert);
-        }
     }
+
+    public static String[] convertArray(boolean[] values, char separator){
+        if (values == null) return null;
+        String[] array = new String [values.length];
+        for (int i = 0; i < values.length; i++) {
+            array[i] = "Wert" + (i+1) + ": " + values[i] + separator;
+        }
+        return array;
+    }
+
+    public static void printArray (String[] values){
+        System.out.println("{");
+        if (values == null || values.length == 0){
+            System.out.println("}");
+            return;
+        }
+        int zaehler = 1;
+        for (String eintrag: values) {
+            System.out.println(eintrag);
+        }
+        System.out.println("}");
+    }
+
+
+
+
+
+
+
 }
