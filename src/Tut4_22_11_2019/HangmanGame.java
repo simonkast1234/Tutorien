@@ -1,7 +1,6 @@
 package Tut4_22_11_2019;
 
 import Prog1Tools.IOTools;
-
 import java.util.Arrays;
 
 public class HangmanGame {
@@ -104,11 +103,5 @@ public class HangmanGame {
     public static void main(String[] args) {
         HangmanGame myGame = new HangmanGame();
         myGame.start();
-
     }
-
-
-
-
-
 }
