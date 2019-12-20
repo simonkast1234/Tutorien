@@ -46,7 +46,7 @@ public class CircularLinkedList<T extends Comparable<? super T>> {
             tail = head;
 
         // Set as new head
-        } else if(value.compareTo(head.value) < 0) { // value < current value => insert before current value
+        } else if(value.compareTo(head.value) < 0) {
             Node<T> tmp = head;
             head = new Node<T>(value);
             head.next = tmp;
@@ -77,7 +77,7 @@ public class CircularLinkedList<T extends Comparable<? super T>> {
         }
 
         // place in between
-        if( value.compareTo(currentNode.value) > 0 && value.compareTo(currentNode.next.value) < 0) { // value > current value && value < next value => insert as next
+        if( value.compareTo(currentNode.value) > 0 && value.compareTo(currentNode.next.value) < 0) {
             Node<T> tmp = currentNode.next;
             currentNode.next = new Node<T>(value);
             currentNode.next.next = tmp;
