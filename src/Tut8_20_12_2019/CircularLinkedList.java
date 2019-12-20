@@ -1,7 +1,11 @@
 package Tut8_20_12_2019;
 
-public class CircularLinkedList<T extends Comparable> {
+import Prog1Tools.IOTools;
+
+public class CircularLinkedList<T extends Comparable<? super T>> {
+    static CircularLinkedList<String> liste = new CircularLinkedList<>();
     Node<T> head;
+    Node<T> tail;
     int size;
 
     public CircularLinkedList() {
@@ -16,7 +20,7 @@ public class CircularLinkedList<T extends Comparable> {
             return "[" + toString("", head) + "]";
         }
     }
-    private String toString(String s, Node currentNode) {
+    private String toString(String s, Node<T> currentNode) {
         if(head.value.compareTo(currentNode.next.value) == 0) {
             s += currentNode.value;
             return s;
@@ -25,58 +29,72 @@ public class CircularLinkedList<T extends Comparable> {
         }
     }
 
-    public void add(T value) {
+    public boolean add() {
+        String s = IOTools.readString("Hinzufügen: ([Q]uit) ");
+        if(s.equals("Q")) {
+            return false;
+        }
+        add((T) s);
+        return true;
+    }
+
+    private void add(T value) {
+        // initially set head
         if(head == null) {
             head = new Node<T>(value);
-            head.next = head; // Kreis 1. Wert muss auf sich selbst zeigen
-            size++;
+            head.next = head;
+            tail = head;
+
+        // Set as new head
+        } else if(value.compareTo(head.value) < 0) { // value < current value => insert before current value
+            Node<T> tmp = head;
+            head = new Node<T>(value);
+            head.next = tmp;
+            tail.next = head;
+
+        // set as new tail
+        } else if(value.compareTo(tail.value) > 0) {
+            tail.next = new Node<T>(value);
+            tail.next.next = head;
+            tail = tail.next;
+
+        // start recursion
         } else {
             add(value, head);
         }
+
+        size++;
+
+        // print out where we are
+        System.out.println(liste.head.value + "=head " + liste + " " + liste.tail.value + "=tail");
     }
 
-    private void add(T value, Node currentNode) {
-        if(value.compareTo(currentNode.value) == -1) { // wenn kleiner => einfügen
-            Node tmp = currentNode;
-            currentNode = new Node(value);
-            currentNode.next = tmp;
-            size++; // erhöhen
-        } else if (
-                    ( value.compareTo(currentNode.value) == 1
-                    && value.compareTo(currentNode.next.value) == -1) ||
-                    currentNode.next.value.compareTo(head.value) == 0)
-                    { // Wenn am Kreisende, einfügen
-            System.out.println("TEST1");
-            Node tmp = currentNode;
-            currentNode.next = new Node(value);
-            currentNode.next.next = tmp.next;
-            size++; // erhöhen
-            System.out.println("TEST2");
-        } else { // Rekursion
+
+    private void add(T value, Node<T> currentNode) {
+        // stop if value has already added before
+        if(value.compareTo(currentNode.value) == 0) {
+            return;
+        }
+
+        // place in between
+        if( value.compareTo(currentNode.value) > 0 && value.compareTo(currentNode.next.value) < 0) { // value > current value && value < next value => insert as next
+            Node<T> tmp = currentNode.next;
+            currentNode.next = new Node<T>(value);
+            currentNode.next.next = tmp;
+        } else {
             add(value, currentNode.next);
         }
     }
 
     public static void main(String[] args) {
-        CircularLinkedList<String> liste = new CircularLinkedList<>();
-        liste.add("B");
-        System.out.println(liste);
-        liste.add("A");
-        System.out.println(liste);
-        liste.add("C");
-        System.out.println(liste);
-        liste.add("F");
-        System.out.println(liste);
 
-        liste.add("D");
-        System.out.println(liste);;
-        liste.add("E");
-        System.out.println(liste);
+        try {
+            while(liste.add()) {
+            }
+            System.out.println("Good bye");
 
-        liste.add("G");
-        System.out.println(liste);
-
-
-        System.out.println(liste);
+        } catch (java.lang.StackOverflowError e) {
+            System.out.println("StackOverflowError");
+        }
     }
 }
