@@ -10,7 +10,7 @@ public class Spieler {
 
     public static void level(Spieler s) throws LevelException{
         if(s.level < 5) {
-            throw new LevelException("Du hast ein zu kleines Level");
+            throw new LevelException("Du hast ein zu kleines Level. errMsg");
         } else {
             System.out.println("Spielen");
         }
@@ -23,7 +23,9 @@ public class Spieler {
         try {
             level(new Spieler("Lappen"));
         } catch(LevelException e) {
-            System.out.println("Du kannst das Level nicht spielen");
+            System.out.println(e.getMessage());
         }
     }
+
+
 }
