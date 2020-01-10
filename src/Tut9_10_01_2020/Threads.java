@@ -1,5 +1,13 @@
 package Tut9_10_01_2020;
 
+/**
+ * 2 Möglichkeiten zum Erstellen:
+ * 1) extends Thread
+ * 2) implements Runnable (klassischere Weg)
+ *
+ * Starten von Threads immer mit .start();
+ */
+
 public class Threads extends Thread {
     public void run() {
         for (int i = 0; i < 30; i++) {

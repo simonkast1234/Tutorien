@@ -31,7 +31,7 @@ public class PiThread implements Runnable {
 
     public static void main(String[] args) throws Exception {
         long startTime = System.currentTimeMillis();
-        Thread[] threads = new Thread[2];
+        Thread[] threads = new Thread[16];
         for (int i = 0; i < threads.length; i++) {
             threads[i] = new Thread(new PiThread(100, 1000000));
         }
@@ -45,8 +45,5 @@ public class PiThread implements Runnable {
 
         System.out.println("Time needed: " + (System.currentTimeMillis() - time) + " ms");
     }
-
-
-
 
 }
