@@ -5,6 +5,28 @@ import java.util.ArrayList;
 
 public class CreatePerson {
     public static void main(String[] args) {
+        // Variante des Einlesens nur mit FileReader. Muss noch mit Funktion für mehrere Zeilen erweitert werden
+        /*
+        ArrayList<Person> personArrayList = new ArrayList<>();
+        ArrayList<Character> buffer = new ArrayList<>();
+        try (FileReader fr = new FileReader("/home/sk/IdeaProjects/Tutorien/src/Tut11_24_01_2020/test.csv")) {
+            char c;
+            String name = "";
+            String age = "";
+            while ((c = (char) fr.read()) != ';') {
+                buffer.add(c);
+                name += c;
+            }
+            while ((c = (char) fr.read()) != '\n') {
+                buffer.add(c);
+                age += c;
+            }
+            personArrayList.add(new Person(name, Integer.parseInt(age)));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+         */
+
         // lesen test.csv ein und speichern Daten als Personen in der ArrayList
         ArrayList<Person> personArrayList = new ArrayList<>();
         try(BufferedReader br = new BufferedReader(new FileReader("/home/sk/IdeaProjects/Tutorien/src/Tut11_24_01_2020/test.csv"))) {
