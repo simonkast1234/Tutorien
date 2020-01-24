@@ -26,7 +26,6 @@ public class ThreadSafeArray {
             while(!rising) { // Schleife, falls einfügen aufgrund ArrayOutOfBounds nicht passiert
                 wait(); // hier warten, bis notified . WENN DAS HIER, DANN IMMER INTERRUPTED EXCEPTION WERFEN
             }
-
             if(index == arr.length - 1) this.rising = false;
             System.out.println(Thread.currentThread().getName() + " produced " + r);
             arr[index++] = r;
