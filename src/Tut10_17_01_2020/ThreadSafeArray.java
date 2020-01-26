@@ -1,11 +1,10 @@
 /**
  * producerConsumer Problem: Mehrere Threads greifen auf dieselben Ressourcen zu
- * Achtung: sleep() oder wait() wirft immer einer interruptedException wenn notified
+ * Achtung: sleep() oder wait() wirft immer eine interruptedException wenn notified
  *          -> also handlen (try-catch oder hochwerfen)
  * wait(), sleep() etc in diesem Fall immer im synchronised block, damit klar ist, welcher Thread schlafen muss.
  * notify() wird ein random thread geweckt
  */
-
 
 package Tut10_17_01_2020;
 
@@ -26,28 +25,28 @@ public class ThreadSafeArray {
             while(!rising) { // Schleife, falls einfügen aufgrund ArrayOutOfBounds nicht passiert
                 wait(); // hier warten, bis notified . WENN DAS HIER, DANN IMMER INTERRUPTED EXCEPTION WERFEN
             }
-            if(index == arr.length - 1) this.rising = false;
             System.out.println(Thread.currentThread().getName() + " produced " + r);
             arr[index++] = r;
             notifyAll(); // alle aufwecken, damit consumer weiß, dass es weitergehen kann
+            if(index == arr.length) this.rising = false;
         }
-     }
+    }
 
-     public void consume() throws InterruptedException {
+    public void consume() throws InterruptedException {
         synchronized (this) {
             while(rising) {
                 wait();
             }
-            if(index == 1) this.rising = true;
-            int toR = this.arr[0];
-            for (int i = 1; i < this.arr.length; i++) {
+            int toRead = this.arr[0];
+            for (int i = 1; i < this.arr.length; i++) { // nach vorne verschieben
                 this.arr[i-1] = this.arr[i];
             }
             this.index--;
-            System.out.println(Thread.currentThread().getName() + " consumed " + toR);
+            System.out.println(Thread.currentThread().getName() + " consumed " + toRead);
             notifyAll();
+            if(index == 0) this.rising = true;
         }
-     }
+    }
 
     public static void main(String[] args) {
         ThreadSafeArray arr = new ThreadSafeArray(20);
