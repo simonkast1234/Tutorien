@@ -11,18 +11,21 @@ import java.nio.Buffer;
 
 public class TimeClient {
     public static void main(String[] args) {
-        while(true) {
+        while (true) {
             try {
                 Socket s = new Socket("127.0.0.1",8080);
                 BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
                 bw.write(IOTools.readString("Matheaufgabe: ") + "\n");
+                bw.flush();
+                BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+                System.out.println(br.readLine());
+                br.close();
                 bw.close();
                 s.close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
     }
 }
             /*
