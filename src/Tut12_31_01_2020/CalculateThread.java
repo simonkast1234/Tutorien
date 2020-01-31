@@ -23,7 +23,7 @@ public class CalculateThread implements Runnable {
             System.out.println(calculation + "=" + erg);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
             bw.write("Dein Ergebnis ist " + erg + "\n");
-            bw.flush();
+            bw.flush(); // wird erst beim Schließen oder Flushen losgeschickt ! Beim Closen wird aber die Socketverbindung geschlossen
             br.close();
             client.close();
         } catch (Exception e) {

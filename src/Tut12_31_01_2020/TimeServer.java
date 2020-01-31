@@ -2,6 +2,10 @@
  * Socket dient als Connector, damit wir über das Netzwerk
  * kommunizieren können. Zugriff über Input- und Output-
  * Streams.
+ *
+ * Zum Absenden von BufferedWriter muss geflusht werden
+ * Flushen passiert auch beim closen, hier wird aber auch der Socket geschlossen.
+ * Das wollen wir jedoch oft noch nicht!
  */
 
 package Tut12_31_01_2020;
@@ -22,6 +26,7 @@ public class TimeServer {
             while(true) {
                 Socket client = s.accept();
                 new Thread(new CalculateThread(client)).start();
+                // Der Thread arbeitet hier die Aufgaben ab, damit mehrere Aufgaben gleichzeitig erledigt werden können
             }
         } catch (Exception e) {
             e.printStackTrace();
