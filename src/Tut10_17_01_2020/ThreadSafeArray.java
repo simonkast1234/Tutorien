@@ -3,6 +3,8 @@
  * Achtung: sleep() oder wait() wirft immer eine interruptedException wenn notified
  *          -> also handlen (try-catch oder hochwerfen)
  * wait(), sleep() etc in diesem Fall immer im synchronised block, damit klar ist, welcher Thread schlafen muss.
+ * wait() gibt das lock frei, deshalb auch nur im synchronised block
+ * sleep() geht auch außerhalb von synchronised
  * notify() wird ein random thread geweckt
  */
 
