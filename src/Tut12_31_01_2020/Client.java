@@ -9,7 +9,7 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.nio.Buffer;
 
-public class TimeClient {
+public class Client {
     public static void main(String[] args) {
         while (true) {
             try {
