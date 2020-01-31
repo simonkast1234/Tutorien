@@ -11,21 +11,23 @@ import java.nio.Buffer;
 
 public class Client {
     public static void main(String[] args) {
-        while (true) {
-            try {
-                Socket s = new Socket("127.0.0.1",8080);
-                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+
+        try {
+            Socket s = new Socket("127.0.0.1",8080);
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
+            BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
+            for (int i = 0; i < 10; i++) {
                 bw.write(IOTools.readString("Matheaufgabe: ") + "\n");
                 bw.flush();
-                BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
                 System.out.println(br.readLine());
-                br.close();
-                bw.close();
-                s.close();
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+            br.close();
+            bw.close();
+            s.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 }
             /*

@@ -17,13 +17,18 @@ public class CalculateThread implements Runnable {
     public void run() {
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            String calculation = br.readLine();
-            String[] values = calculation.split("\\+");
-            int erg = Integer.parseInt(values[0]) + Integer.parseInt(values[1]);
-            System.out.println(calculation + "=" + erg);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-            bw.write("Dein Ergebnis ist " + erg + "\n");
-            bw.flush(); // wird erst beim Schließen oder Flushen losgeschickt ! Beim Closen wird aber die Socketverbindung geschlossen
+            String calculation;
+            String[] values;
+            int erg;
+            while((calculation = br.readLine()) != null) {
+                values = calculation.split("\\+");
+                erg = Integer.parseInt(values[0]) + Integer.parseInt(values[1]);
+                System.out.println(calculation + "=" + erg);
+
+                bw.write("Dein Ergebnis ist " + erg + "\n");
+                bw.flush(); // wird erst beim Schließen oder Flushen losgeschickt ! Beim Closen wird aber die Socketverbindung geschlossen
+            }
             br.close();
             client.close();
         } catch (Exception e) {
