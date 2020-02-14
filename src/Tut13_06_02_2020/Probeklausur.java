@@ -51,6 +51,13 @@
  * c) abstrakte Lösung für häufige Probleme
  *  besserer Code
  *  vereinfachen der Kommunikations (z.B. zw Programierern)
+ *
+ *  Aufg. 10
+ *  ...
+ *
+ *  Aufg. 11
+ *  siehe Klasse
+ *
  */
 
 package Tut13_06_02_2020;
