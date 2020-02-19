@@ -1,9 +1,6 @@
 package Socket;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class CalculateThread implements Runnable {
@@ -31,7 +28,7 @@ public class CalculateThread implements Runnable {
             }
             br.close();
             client.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
